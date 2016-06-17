@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="col-lg-4 col-md-6 col-xs-12 products">
+      <h3>{{ recipe.title }}</h4>
+      <h4>{{ recipe.description}}</h4>
+      <div class="ingredients">
+        <h5>Ingredients</h5>
+        <ul class="ingredients-list"> 
+          <li ng-repeat="ingredient in recipe.ingredients">{{ingredient}}</li>
+        </ul>
+        <button class="btn btn-primary btn-raised" ng-click="recordInstruction()">Record</button>
+      </div>
+      <div class="ingredients">
+        <h5>Directions</h5>
+        <ul class="directions-list">
+          <li ng-repeat="direction in recipe.directions">{{direction}}</li>
+        </ul>
+        <button class="btn btn-danger btn-raised" ng-click="stopInstruction(); getCurrentInstruction()">Stop</button>
+      </div> 
+      <div>
+        <p> {{ instruction || "none"}}</p>
+      </div>      
+  </div>
+  <button class="btn btn-info btn-raised" ui-sref="home">Return to All Recipes</button>
+</div>
