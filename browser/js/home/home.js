@@ -4,13 +4,25 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/home/home.html',
         controller:"HomeCtrl",
         resolve: {
-        	allRecipes: function (RecipeFactory) {
-        		return RecipeFactory.getAllRecipes();
+        	allRecipes: function (RecipesFactory) {
+        		return RecipesFactory.getAllRecipes();
         	}
         }
     });
+
+    $stateProvider.state('login', {
+        url: '/login',
+        template: '<login-form></login-form>' 
+    });
+
+    $stateProvider.state('signup', {
+        url: '/signup',
+        template: '<signup-form></signup-form>' 
+    });   
 });
 
-app.controller('HomeCtrl', function ($scope, allRecipes) {
+app.controller('HomeCtrl', function ($scope, allRecipes, Session) {
 	$scope.recipes = allRecipes;
+    $scope.user = Session.user;
+
 })

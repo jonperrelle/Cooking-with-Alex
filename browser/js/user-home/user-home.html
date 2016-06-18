@@ -1,0 +1,14 @@
+<section class="user-home">
+  <div class="home-container">
+    <h2 class="text-center">Welcome {{user.fullName}}!</h2>
+    <div class="row">
+      <div class="col-md-4 col-sm-3 col-xs-1"></div>
+        <div class="col-md-4 col-sm-6 col-xs-10 user-home-btns">
+        <div class="text-center"><button ui-sref="addUserRecipe({userId: user.id})" class="btn login-signup-btn">Add a New Recipe</button></div>
+        <div class='text-center'><button ui-sref="userRecipes({userId: user.id})" class="btn login-signup-btn">View Your Recipes</button></div>
+    </div>
+    <div class="col-md-4 col-sm-3 col-xs-1"></div>
+    </div>
+    </div>
+</section>
+     

@@ -1,10 +1,16 @@
 var Sequelize = require('sequelize');
 
+
 module.exports = function (db) {
+
+    var User = db.model('user');
 
     db.define('recipe', {
         title: {
           type: Sequelize.STRING
+        },
+        mealtype: {
+          type: Sequelize.ENUM('Breakfast', 'Lunch', 'Dinner', 'Dessert')
         },
         description: {
           type: Sequelize.TEXT
@@ -42,7 +48,11 @@ module.exports = function (db) {
               this.setDataValue('directions', tags);
 
             }
-        },
+        }
+    }, {
+      defaultScope: {
+        include: [User]
+      }
 
     });
 

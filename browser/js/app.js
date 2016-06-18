@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('RecipeReader', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('recipeReader', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMessages']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -27,12 +27,14 @@ app.run(function ($rootScope, AuthService, $state) {
         if (!destinationStateRequiresAuth(toState)) {
             // The destination state does not require authentication
             // Short circuit with return.
+       
             return;
         }
 
         if (AuthService.isAuthenticated()) {
             // The user is authenticated.
             // Short circuit with return.
+           
             return;
         }
 

@@ -1,9 +1,23 @@
 * {
   box-sizing: border-box;
+  font-family: 'Poiret One', serif;
 }
 
 body {
-  background: #fdfdfd;
+  background: #F5F5F5;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 900;
+}
+
+a {
+  color: #33cc33;
+  font-weight: 700;
+}
+a:hover {
+  text-decoration: none;
+  color: #ff5050;
 }
 
 @mixin clearfix {
@@ -23,4 +37,4 @@ body {
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
-@import 'login/main';
+@import 'user/main';

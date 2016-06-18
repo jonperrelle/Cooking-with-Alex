@@ -32,7 +32,6 @@ module.exports = function (app, db) {
     app.post('/login', function (req, res, next) {
 
         var authCb = function (err, user) {
-
             if (err) return next(err);
 
             if (!user) {
@@ -56,4 +55,14 @@ module.exports = function (app, db) {
 
     });
 
+    app.post('/signup', function (req, res, next) {
+        User.create(req.body)
+        .then(function(user) {
+            console.log(user);
+            res.send(user);
+        })
+        .catch(function() {
+            res.sendStatus(401);
+        });
+    });
 };

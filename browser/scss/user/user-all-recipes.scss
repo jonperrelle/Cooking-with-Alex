@@ -1,0 +1,38 @@
+.recipe-short {
+   background: #ffffff;
+   border: 1px solid #6A6762;
+   border-radius: 5px;
+   margin: 20px 0;
+   h4 {
+   	font-weight: 900;
+   	color: #6A6762;
+   	padding: 5px 10px;
+   }
+
+   p {
+    color: #5CACED;
+    padding: 5px 20px;
+   }
+}
+
+.user-recipes-header {
+	margin-top: 60px;
+	margin-bottom: 30px;
+	list-style: none;
+	li {
+	display: inline-block;
+	}
+
+}
+
+.btn.user-recipes-btn {
+	color: white;
+    background: #6A6762;
+}
+
+.btn.user-recipes-btn:hover {
+	background: white;
+	color: #6A6762;
+	border: 1px solid #6A6762;
+}
+
