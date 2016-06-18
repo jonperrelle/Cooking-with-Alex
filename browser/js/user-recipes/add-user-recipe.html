@@ -1,7 +1,8 @@
 <section>
 
 	<div class="row home-container">
-		<div class="well">
+		<user-recipe-header view-recipes="userRecipes" button="Return to Your Recipes"></user-recipe-header>
+		<div class="add-recipe">
 			<header class="text-center">
 			  <h3>Add a New Recipe</h3>
 			</header>
@@ -17,7 +18,12 @@
 				      <div class="form-group col-xs-6">
 				        <label for="meal-type" class="control-label">Meal Type</label>
 				        <div>
-				          <input class="form-control" name="type" type="text" ng-model="recipe.mealtype" required>
+				          <select class="form-control" name="type" type="text" ng-model="recipe.mealtype" required>
+				          	<option value="Breakfast">Breakfast</option>
+				          	<option value="Lunch">Lunch</option>
+				          	<option value="Dinner">Dinner</option>
+				          	<option value="Dessert">Dessert</option>
+				          </select>
 				        </div>
 				      </div>
 				    </div>

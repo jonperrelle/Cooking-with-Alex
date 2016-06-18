@@ -1,118 +1,122 @@
 app.factory('RecipeFactory', function ($http) {
-
     var recipeObj = {};
     var synth = window.speechSynthesis;
     var voice = synth.getVoices()[0];
     var ingredientIndex = 0;
     var directionIndex = 0;
-    var recognition;
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    var instruction = "";
-    var interim_instruction = "";
     var utterThis;
+    var listClass ="";
+    var recognition = new SpeechRecognition();
+    var directionList;
+    var ingredientList;
+  
 
-    var firstListItem = function(className) {
-        var listType = className.match(/\w+/)[0];
-        if (listType === 'direction') {
-            listType = 'step';
-            directionIndex = 0;
+    function playIngredient () { 
+        if (ingredientIndex < ingredientList.length) { 
+          var item = ingredientList[ingredientIndex];
+          if (ingredientIndex === 0 ) utterThis = new SpeechSynthesisUtterance("The first ingredient is       " + item.innerHTML);
+          else utterThis = new SpeechSynthesisUtterance(item.innerHTML);
+          utterThis.voice = voice;
+          utterThis.pitch = 1;
+          utterThis.rate = .6;
+          synth.speak(utterThis);
+          ingredientIndex++;
         }
         else {
             ingredientIndex = 0;
+            utterThis = new SpeechSynthesisUtterance("There are no more ingredients");
+            synth.speak(utterThis);
         }
-        var firstItem = document.querySelector(className).children[0];
-        utterThis = new SpeechSynthesisUtterance("The first " + listType + " is " + firstItem.innerHTML);
-        utterThis.voice = voice;
-        utterThis.pitch = 1;
-        utterThis.rate = .8;
-        synth.speak(utterThis);
+            
     }
-    
 
-      
-    if (annyang) {
-      var list = ""
-      var commands = {
-        'ingredients': function () {
-            console.log('Here');
-            list = ".ingredient-list";
-            firstListItem(list);
-        },
-        'directions': function () {
-            list = ".direction-list";
-            firstListItem(list);
-        },
-        'next': function() {
-            console.log('here');
-            playListItem(list);
-        },
-
-        'repeat': function() {
-            console.log('here again');
-            document.querySelector('p').innerHTML = "This is cool";
-        }
-      };
-
-      // Add our commands to annyang
-      annyang.addCommands(commands);
-      annyang.addCallback('result', function (userSaid, commandText, phrases) {
-        console.log(userSaid);
-        console.log(phrases)
-      })
-      // annyang.addCallback('resultNoMatch', function () {
-      //   utterThis = new SpeechSynthesisUtterance("I'm sorry, I did not understand.  Can you please say it again?");
-      //   utterThis.voice = voice;
-      //   utterThis.pitch = 1;
-      //   utterThis.rate = 1;
-      //   synth.speak(utterThis);
-      // });
-
-      // Start listening. You can call this here, or attach this call to an event, button, etc.
-      annyang.start();
-    }        
-
-
-    var playListItem = function (className, listType) {
-        var listType = className.match(/\w+/)[0];
-        var list = [].slice.call(document.querySelector(className).children, 1);
+    function playDirection () {
         
-        if (listType === "ingredient") {
-            if (ingredientIndex < list.length) { 
-              var item = list[ingredientIndex];
-              utterThis = new SpeechSynthesisUtterance(item.innerHTML);
-              utterThis.voice = voice;
-              utterThis.pitch = 1;
-              utterThis.rate = 1;
-              synth.speak(utterThis);
-              ingredientIndex++;
-            }
-            else {
-                ingredientIndex = 0;
-                utterThis = new SpeechSynthesisUtterance("There are no more " + listType + "s");
-                synth.speak(utterThis);
-            }
-            
+        if (directionIndex < directionList.length) { 
+          var item = directionList[directionIndex];
+           if (directionIndex === 0 ) utterThis = new SpeechSynthesisUtterance("The first step is       " + item);
+          else utterThis = new SpeechSynthesisUtterance(item);
+          utterThis.voice = voice;
+          utterThis.pitch = 1;
+          utterThis.rate = .6;
+          synth.speak(utterThis);
+          directionIndex++;
+        }
+        else {
+            directionIndex = 0;
+            utterThis = new SpeechSynthesisUtterance("There are no more directions");
+            synth.speak(utterThis);
         }
 
-        else if (listType === "direction") {
-            if (directionIndex < list.length) { 
-              var item = list[directionIndex];
-              utterThis = new SpeechSynthesisUtterance(item.innerHTML);
-              utterThis.voice = voice;
-              utterThis.pitch = 1;
-              utterThis.rate = 1;
-              synth.speak(utterThis);
-              directionIndex++;
-            }
-            else {
-                directionIndex = 0;
-                utterThis = new SpeechSynthesisUtterance("There are no more " + listType + "s");
-                synth.speak(utterThis);
-            }
-            
-        }
+    }
 
-    };
+    function playListItem (repeat) {
+        if (listClass === ".direction-list") {
+            if (repeat) directionIndex--;
+            playDirection();
+        }
+        else if (listClass === ".ingredient-list") {
+            if (repeat) ingredientIndex--;
+            playIngredient();
+        }
+    }
+      
+    recipeObj.enableAlex = function () {
+        directionList = [].slice.call(document.querySelector(".direction-list").children)
+                    .map( item => {
+                        return item.innerHTML.match(/[^\,]/g).join("").split(/\./).filter( i => i !== "")
+                    })
+                    .join().split(",");
+
+        ingredientList = [].slice.call(document.querySelector(".ingredient-list").children);
+        if (annyang) {
+          var commands = {
+            'ingredients': function () {
+                ingredientIndex = 0
+                listClass = ".ingredient-list";
+                playIngredient();
+            },
+            'directions': function () {
+                directionIndex = 0
+                listClass = ".direction-list";
+                playDirection();
+            },
+            'next': playListItem,
+
+            'repeat': function() {
+                playListItem(true);
+            },
+
+            'again': function() {
+                playListItem(true);
+            },
+
+            'previous': function() {
+                playListItem(true);
+            }
+          };
+
+          // Add our commands to annyang
+          annyang.addCommands(commands);
+          annyang.addCallback('result', function (userSaid, commandText, phrases) {
+            console.log(userSaid);
+            console.log(phrases)
+          })
+          // annyang.addCallback('resultNoMatch', function () {
+          //   utterThis = new SpeechSynthesisUtterance("I'm sorry, I did not understand.  Can you please say it again?");
+          //   utterThis.voice = voice;
+          //   utterThis.pitch = 1;
+          //   utterThis.rate = 1;
+          //   synth.speak(utterThis);
+          // });
+
+          // Start listening. You can call this here, or attach this call to an event, button, etc.
+          annyang.start();
+        }  
+    }      
+
+
 
     recipeObj.getOneRecipe = function (id) {
         return $http.get('/api/recipes/' + id)
@@ -121,66 +125,40 @@ app.factory('RecipeFactory', function ($http) {
             });
     };
 
-    recipeObj.listIngredient = function () {
-        
-    };
-
-    recipeObj.listDirection = function () {
-        playListItem('.directions-list', 'directions');
-    };
-
-    recipeObj.recordInstruction = function () {
-        recognition = new SpeechRecognition();
-        recognition.lang = 'en-US';
-        recognition.start();
-    
-        recognition.onresult = function (e) {
-            console.log("In Result");
-            if(typeof(e.results) === 'undefined') {
-                recognition.onend = null;
-                recognition.stop();
-                return;
-            }
-            for (var i = e.resultIndex; i < e.results.length; ++i) {
-                if (e.results[i].isFinal) {
-                    instruction += e.results[i][0].transcript;
-                }
-                else {
-                    interim_transcript += e.results[i][0].transcript;
-                }
-            }
-            if (/(next)/.exec(instruction)) {
-                playListItem('.ingredients-list', 'ingredients');
-                instruction = ""
-            }
-            else {
-                instruction === "";
-            }
-            recipeObj.stopInstruction();
-            
-        };
-
-        //runs when the voice recognition ends.  Set to null in onresult to prevent it running
-        // if there is a successful result
-        recognition.onend = function () {
-            console.log("Here");
-            recipeObj.stopInstruction();
-        };
-    };
-
-    recipeObj.stopInstruction = function () {
-        if (recognition) {
-            recognition.stop();
-            recognition = null;
-        }
-        return;
-    },
-
-    recipeObj.getCurrentInstruction = function () {
-        console.log("HereHereHere", instruction);
-        return instruction;
-    };
 
     return recipeObj;
 
 });
+
+
+//WebSpeech API
+    // recipeObj.enableAlex = function () {
+    //     recognition.start();
+    // }
+    //     recognition.continuous = true;
+    //     recognition.interimResults = true;
+    //     recognition.onstart = function( e ) {
+    //           console.log( e );
+    //     };
+    //     var final_transcript = '';
+    //     recognition.onresult = function( event ) {
+    //         var final_transcript = '';
+    //         for (var i = event.resultIndex; i < event.results.length; ++i) {
+    //           if (event.results[i].isFinal) {
+    //                 final_transcript += event.results[i][0].transcript;
+    //           } 
+    //         }
+    //         console.log("Here2", final_transcript.length)
+    //         if (final_transcript.match(/ingredients/g)) {
+    //             listClass = '.ingredient-list';
+    //             firstListItem(listClass);
+    //         }
+    //         else if (final_transcript.match(/directions/g)) {
+    //             listClass = '.direction-list';
+    //             firstListItem(listClass);
+    //         }
+
+    //         else if (final_transcript.match(/next/g)) {
+    //             playListItem(listClass)
+    //         }
+    //     };

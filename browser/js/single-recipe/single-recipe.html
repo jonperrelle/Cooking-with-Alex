@@ -1,14 +1,10 @@
 <div class="recipe-container">
-  <header class="text-center">
-      <ul class="user-recipes-header">
-          <li><button class="btn user-recipes-btn" ui-sref="userHome({userId: user.id})">Return to Your Dashboard</button></li>
-          <li><button class="btn user-recipes-btn" ui-sref="userRecipes({userId: user.id})">Return to All Recipes</button></li>
-      </ul>
-    </header>
+  <user-recipe-header view-recipes="userRecipes" button="Return to Your Recipes"></user-recipe-header>
   <div class="col-lg-4 col-md-6 col-xs-12 recipe">
       <header class="text-center">
         <h2 id="recipe-title">{{ recipe.title }}</h2>
         <h5>{{ recipe.description}}</h5>
+        <button class="btn user-recipes-btn" ng-click="enableAlex()">Enable Alex</button>
       </header>
       <hr />
       <div class="recipe-list">

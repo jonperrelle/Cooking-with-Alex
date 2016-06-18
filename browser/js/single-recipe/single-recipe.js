@@ -14,13 +14,7 @@ app.config(function ($stateProvider) {
 app.controller('OneUserRecipeCtrl', function ($scope, oneRecipe, RecipeFactory) {
 	$scope.recipe = oneRecipe;
 	$scope.user = oneRecipe.user;
-
-	$scope.listIngredient = function () {
-		RecipeFactory.listIngredient();
-	};
-
-	$scope.listDirection = function () {
-		RecipeFactory.listDirection();
-	};
-
+    $scope.enableAlex = function () {
+        RecipeFactory.enableAlex();
+    };
 });

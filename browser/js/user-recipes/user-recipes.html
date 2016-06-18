@@ -1,22 +1,23 @@
 <section>
 	<div class="home-container">
-		<header class="text-center">
-			<ul class="user-recipes-header">
-			  	<li><button class="btn user-recipes-btn" ui-sref="userHome({userId: user.id})">Return to Your Dashboard</button></li>
-			  	<li><button class="btn user-recipes-btn" ui-sref="addUserRecipe({userId: user.id})">Add a recipe</button></li>
-			</ul>
-		</header>
-	 	<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="recipe in userRecipes">
-	    	<a ui-sref="oneUserRecipe({userId: user.id, recipeId:recipe.id})">
-	    		<div class="row recipe-text">
-		      		<div class="col-xs-12">
-		      			<div class="recipe-short">
-			          		<h4>{{ recipe.title }}</h4>
-			          		<p>{{ recipe.description }}</p>
-		         		</div>
-		      		</div>
-	    		</div>
-	    	</a>
-	    </div>
+		<user-recipe-header view-recipes="addUserRecipe" button="Add a New Recipe"></user-recipe-header>
+		<div ng-show="noRecipes" class="text-center">
+			<h2>You have no Recipes</h2>
+			<h4><a ui-sref="addUserRecipe({userId: user.id})">Add a new one!</a></h4>
+		</div>
+		<div ng-show="!noRecipes">
+		 	<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="recipe in userRecipes">
+		    	<a ui-sref="oneUserRecipe({userId: user.id, recipeId:recipe.id})">
+		    		<div class="row recipe-text">
+			      		<div class="col-xs-12">
+			      			<div class="recipe-short">
+				          		<h4>{{ recipe.title }}</h4>
+				          		<p>{{ recipe.description }}</p>
+			         		</div>
+			      		</div>
+		    		</div>
+		    	</a>
+		    </div>
+		</div>
 	</div>
 </section>

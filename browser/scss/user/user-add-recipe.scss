@@ -1,0 +1,27 @@
+
+.add-recipe {
+	margin-top: 40px;
+	background: #ffffff;
+	border: 1px solid #6A6762;
+	border-radius: 5px;
+	width: 100%;
+
+	.form-group {
+		padding: 0 40px;
+		label {
+			font-weight: 900;
+			font-size: 1.3em;
+			 color: #5CACED;
+		}
+		select {
+			height: 43px;
+		}
+		.form-control {
+			font-size: 1.1em;
+			padding: 20px;
+		}
+	}
+}
+
+
+
