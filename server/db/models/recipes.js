@@ -33,7 +33,7 @@ module.exports = function (db) {
             }
         },
         directions: {
-            type: Sequelize.ARRAY(Sequelize.STRING),
+            type: Sequelize.ARRAY(Sequelize.TEXT),
             defaultValue: [],
             set: function (tags) {
 

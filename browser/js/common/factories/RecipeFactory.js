@@ -24,7 +24,7 @@ app.factory('RecipeFactory', function ($http) {
         utterThis = new SpeechSynthesisUtterance("The first " + listType + " is " + firstItem.innerHTML);
         utterThis.voice = voice;
         utterThis.pitch = 1;
-        utterThis.rate = 1;
+        utterThis.rate = .8;
         synth.speak(utterThis);
     }
     

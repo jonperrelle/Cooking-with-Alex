@@ -23,15 +23,4 @@ app.controller('OneUserRecipeCtrl', function ($scope, oneRecipe, RecipeFactory) 
 		RecipeFactory.listDirection();
 	};
 
-	$scope.recordInstruction = function () {
-		let inst = RecipeFactory.recordInstruction();
-	}; 
-
-	$scope.stopInstruction = function () {
-		RecipeFactory.stopInstruction();
-	};
-
-	$scope.getCurrentInstruction = function () {
-		$scope.instruction = RecipeFactory.getCurrentInstruction();
-	};
 });
