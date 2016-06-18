@@ -19,7 +19,12 @@ module.exports = function (db) {
           }
         },
         email: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            unique: true,
+            validate: {
+              isEmail: true
+            },
+            allowNull: false,
         },
         password: {
             type: Sequelize.STRING

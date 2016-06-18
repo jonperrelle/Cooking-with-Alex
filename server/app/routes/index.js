@@ -4,6 +4,7 @@ module.exports = router;
 
 router.use('/members', require('./members'));
 router.use('/recipes', require('./api/recipes'));
+router.use('/users', require('./api/users'));
 
 // Make sure this is after all of
 // the registered routes!

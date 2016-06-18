@@ -52,6 +52,7 @@
 
         function onSuccessfulLogin(response) {
             var data = response.data;
+            data.id = data.id || 2;  //fix this later
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             return data.user;
@@ -101,6 +102,15 @@
             });
         };
 
+        this.signup = function(credentials) {
+            return $http.post('/signup', credentials)
+                .then(function(data) {
+                    console.log('data', data);
+                })
+                .catch(function () {
+                    return $q.reject({ message: 'Invalid signup. User already exists.  Please Sign In.' });
+                });
+        }
     });
 
     app.service('Session', function ($rootScope, AUTH_EVENTS) {

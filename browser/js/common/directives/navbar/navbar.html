@@ -1,17 +1,27 @@
-<nav class="navbar navbar-static-top">
+<nav class="navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
+            <scorestore-logo></scorestore-logo>
+            <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#right-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>  -->
         </div>
         <ul class="nav navbar-nav">
-            <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
-            </li>
+            <li><button ui-sref-active="active" ui-sref="home" class="btn navbar-button">Home</button></li>
         </ul>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
-        </div>
+        <!-- <div id="right-navbar" class='navbar-collapse collapse'> -->
+            <ul class='nav navbar-right'>
+                <div ng-show="isLoggedIn()">
+                    <button ui-sref="userHome({userId: user.id})" class="btn navbar-button">My Account</button>
+                    <button ng-click="logout()" class="btn navbar-button">Logout</button>
+                </div>
+                <div ng-show="!isLoggedIn()">
+                    <button ui-sref="login" class="btn navbar-button">Login</button>
+                    <button ui-sref="signup" class="btn navbar-button">Sign Up</button>
+            </ul>
+        <!-- </div> -->
     </div>
 </nav>

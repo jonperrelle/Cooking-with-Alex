@@ -1,0 +1,32 @@
+.recipe-container {
+	margin: 0 auto;
+	width: 70%;
+	margin-top: 30px;
+
+	.recipe {
+		background: #ffffff;
+		border: 1px solid #6A6762;
+		border-radius: 5px;
+		width: 100%;
+
+		h5 {
+			margin: 20px 0;
+			color: #5CACED;
+		}
+
+		.recipe-list {
+			margin-top: 30px;
+			h3 {
+				padding-left: 20px;
+			}
+			li {
+				list-style: none;
+				font-size: 1.3em;
+				padding: 5px 0 5px 10px
+			}
+		}
+	}
+
+
+
+}

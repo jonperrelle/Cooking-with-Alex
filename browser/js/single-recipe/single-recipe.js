@@ -1,8 +1,8 @@
 app.config(function ($stateProvider) {
-    $stateProvider.state('oneRecipe', {
-        url: '/recipes/:recipeId',
+    $stateProvider.state('oneUserRecipe', {
+        url: '/users/:userId/recipes/:recipeId',
         templateUrl: 'js/single-recipe/single-recipe.html',
-        controller:"OneRecipeCtrl",
+        controller:"OneUserRecipeCtrl",
         resolve: {
         	oneRecipe: function (RecipeFactory, $stateParams) {
         		return RecipeFactory.getOneRecipe($stateParams.recipeId);
@@ -11,8 +11,9 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('OneRecipeCtrl', function ($scope, oneRecipe, RecipeFactory) {
+app.controller('OneUserRecipeCtrl', function ($scope, oneRecipe, RecipeFactory) {
 	$scope.recipe = oneRecipe;
+	$scope.user = oneRecipe.user;
 
 	$scope.listIngredient = function () {
 		RecipeFactory.listIngredient();

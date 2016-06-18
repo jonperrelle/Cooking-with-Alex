@@ -2,8 +2,6 @@ navbar {
 
   display: block;
   background: white;
-  border-bottom: 1px solid black;
-  box-shadow: 1px 1px 14px -3px black;
 
   .container {
     width: 91%;
@@ -17,32 +15,18 @@ navbar {
     width: 40px;
   }
 
-  a {
-    color: black;
-    font-size: 16px;
-  }
-
-  .nav > li > a {
-    cursor: pointer;
-    transition: color 0.2s;
-    &.active {
-      color: darken(#f31214, 10%);
-    }
-    &:hover {
-      background: none;
-      color: #f31214;
-    }
-    &:focus {
-      background: none;
-    }
-  }
-
-  .login-button {
-    float: right;
-    border: 1px solid black;
+  .btn.navbar-button {
+    color: white;
+    background: #6A6762;
     margin-top: 10px;
-    background: none;
     outline: none !important;
+    margin-right: 30px;
+  }
+
+  .btn.navbar-button:hover {
+    background: white;
+    color: #6A6762;
+    border: 1px solid #6A6762;
   }
 
   .welcome {
@@ -59,4 +43,8 @@ navbar {
     }
   }
 
+}
+
+.hamburger-button {
+   border: 1px solid black;
 }

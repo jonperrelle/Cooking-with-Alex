@@ -3,20 +3,48 @@ app.factory('RecipeFactory', function ($http) {
     var recipeObj = {};
     var synth = window.speechSynthesis;
     var voice = synth.getVoices()[0];
-    var index = 0;
+    var ingredientIndex = 0;
+    var directionIndex = 0;
     var recognition;
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
     var instruction = "";
     var interim_instruction = "";
     var utterThis;
-       
+
+    var firstListItem = function(className) {
+        var listType = className.match(/\w+/)[0];
+        if (listType === 'direction') {
+            listType = 'step';
+            directionIndex = 0;
+        }
+        else {
+            ingredientIndex = 0;
+        }
+        var firstItem = document.querySelector(className).children[0];
+        utterThis = new SpeechSynthesisUtterance("The first " + listType + " is " + firstItem.innerHTML);
+        utterThis.voice = voice;
+        utterThis.pitch = 1;
+        utterThis.rate = 1;
+        synth.speak(utterThis);
+    }
+    
+
       
     if (annyang) {
-      // Let's define our first command. First the text we expect, and then the function it should call
+      var list = ""
       var commands = {
+        'ingredients': function () {
+            console.log('Here');
+            list = ".ingredient-list";
+            firstListItem(list);
+        },
+        'directions': function () {
+            list = ".direction-list";
+            firstListItem(list);
+        },
         'next': function() {
-            console.log("here");
-          playListItem('.ingredients-list', 'ingredients');
+            console.log('here');
+            playListItem(list);
         },
 
         'repeat': function() {
@@ -27,45 +55,63 @@ app.factory('RecipeFactory', function ($http) {
 
       // Add our commands to annyang
       annyang.addCommands(commands);
+      annyang.addCallback('result', function (userSaid, commandText, phrases) {
+        console.log(userSaid);
+        console.log(phrases)
+      })
+      // annyang.addCallback('resultNoMatch', function () {
+      //   utterThis = new SpeechSynthesisUtterance("I'm sorry, I did not understand.  Can you please say it again?");
+      //   utterThis.voice = voice;
+      //   utterThis.pitch = 1;
+      //   utterThis.rate = 1;
+      //   synth.speak(utterThis);
+      // });
 
       // Start listening. You can call this here, or attach this call to an event, button, etc.
       annyang.start();
     }        
 
 
-
-
-
-
     var playListItem = function (className, listType) {
-        var list = [].slice.call(document.querySelector(className).children);
-        if (index < list.length) { 
-          var item = list[index];
-          utterThis = new SpeechSynthesisUtterance(item.innerHTML);
-          utterThis.voice = voice;
-          utterThis.pitch = 1;
-          utterThis.rate = 1;
-          synth.speak(utterThis);
-          index++;
+        var listType = className.match(/\w+/)[0];
+        var list = [].slice.call(document.querySelector(className).children, 1);
+        
+        if (listType === "ingredient") {
+            if (ingredientIndex < list.length) { 
+              var item = list[ingredientIndex];
+              utterThis = new SpeechSynthesisUtterance(item.innerHTML);
+              utterThis.voice = voice;
+              utterThis.pitch = 1;
+              utterThis.rate = 1;
+              synth.speak(utterThis);
+              ingredientIndex++;
+            }
+            else {
+                ingredientIndex = 0;
+                utterThis = new SpeechSynthesisUtterance("There are no more " + listType + "s");
+                synth.speak(utterThis);
+            }
+            
         }
-        else {
-            utterThis = new SpeechSynthesisUtterance("There are no more " + listType);
-            synth.speak(utterThis);
-            index = 0;
+
+        else if (listType === "direction") {
+            if (directionIndex < list.length) { 
+              var item = list[directionIndex];
+              utterThis = new SpeechSynthesisUtterance(item.innerHTML);
+              utterThis.voice = voice;
+              utterThis.pitch = 1;
+              utterThis.rate = 1;
+              synth.speak(utterThis);
+              directionIndex++;
+            }
+            else {
+                directionIndex = 0;
+                utterThis = new SpeechSynthesisUtterance("There are no more " + listType + "s");
+                synth.speak(utterThis);
+            }
+            
         }
-    };
 
-
-
-
-
-
-
-    recipeObj.getAllRecipes = function () {
-        return $http.get('/api/recipes')
-        .then(function(response) {
-            return response.data;
-        });
     };
 
     recipeObj.getOneRecipe = function (id) {

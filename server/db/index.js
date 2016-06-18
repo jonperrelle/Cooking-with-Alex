@@ -9,4 +9,5 @@ var User = db.model('user');
 var Recipe = db.model('recipe');
 
 User.hasMany(Recipe);
+Recipe.belongsTo(User);
 

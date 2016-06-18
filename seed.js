@@ -60,6 +60,7 @@ var seedRecipes = function () {
     var recipes = [
         {
             title: "Spaghetti and Meatballs",
+            mealtype: 'Dinner',
             description: "Great for dinner",
             ingredients: ['1 cup tomatoes', '10 ounces water', '1 clove garlic'],
             directions: ['Step 1', 'Step 2', 'Step 3'],
@@ -67,6 +68,7 @@ var seedRecipes = function () {
         },
         {
             title: "Mushroom Soup",
+            mealtype: 'Lunch',
             description: 'Good lunch selection',
             ingredients: ['1 cup mushrooms', '10 ounces beer', '1 teaspoon oregano'],
             directions: ['Step 4', 'Step 5', 'Step 6'],
