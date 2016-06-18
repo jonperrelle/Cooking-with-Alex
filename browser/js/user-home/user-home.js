@@ -4,14 +4,13 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/user-home/user-home.html',
         controller:"UserHomeCtrl",
         resolve: {
-            userRecipes: function (RecipesFactory, $stateParams) {
-                return RecipesFactory.getUserRecipes($stateParams.userId);
+            User: function ($stateParams, UserFactory) {
+                return UserFactory.getUser($stateParams.userId);
             }
         }
     });
 });
 
-app.controller('UserHomeCtrl', function ($scope, userRecipes) {
-    $scope.user = userRecipes[0].user
-    $scope.userRecipes = userRecipes;
+app.controller('UserHomeCtrl', function ($scope, User) {
+    $scope.user = User;
 });

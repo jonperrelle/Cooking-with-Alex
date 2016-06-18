@@ -11,7 +11,18 @@ app.config(function ($stateProvider) {
     });
 });
 
-app.controller('UserRecipesCtrl', function ($scope, userRecipes) {
-    $scope.user = userRecipes[0].user
-    $scope.userRecipes = userRecipes;
+app.controller('UserRecipesCtrl', function ($scope, userRecipes, UserFactory, $stateParams) {
+    if (userRecipes.length) {
+        $scope.noRecipes = false;
+        $scope.user = userRecipes[0].user
+        $scope.userRecipes = userRecipes;
+    }
+    else {
+        $scope.noRecipes = true;
+        UserFactory.getUser($stateParams.userId)
+        .then(function(data) {
+            $scope.user = data;
+        })
+    }
+    
 });

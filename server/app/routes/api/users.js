@@ -16,6 +16,10 @@ router.param("id", function(req, res, next, id) {
     .catch(next);
 })
 
+router.get('/:id', function (req, res, next) {
+    res.send(req.loggedInUser);
+})
+
 router.get('/:id/recipes', function(req, res, next) {
     Recipe.findAll({
       where: {

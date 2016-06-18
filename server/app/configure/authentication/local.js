@@ -58,7 +58,6 @@ module.exports = function (app, db) {
     app.post('/signup', function (req, res, next) {
         User.create(req.body)
         .then(function(user) {
-            console.log(user);
             res.send(user);
         })
         .catch(function() {
