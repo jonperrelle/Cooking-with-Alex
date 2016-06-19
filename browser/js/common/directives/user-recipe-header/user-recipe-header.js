@@ -1,20 +1,20 @@
-app.directive('userRecipeHeader', function ($state, AuthService, UserFactory, $stateParams) {
+app.directive('userRecipeHeader', function ($state, RecipeFactory, UserFactory, $stateParams) {
     return {
         restrict: 'E',
         templateUrl: 'js/common/directives/user-recipe-header/user-recipe-header.html',
         scope: { 
             viewRecipes: '@',
-            button: '@'
+            button: '@',
+            edit: '@'
          },
         link: function(scope) {
-        	UserFactory.getUser($stateParams.userId)
-            .then(function (user) {
-                scope.user = user;
-            });
+
+            scope.userId = $stateParams.userId;
+            scope.recipeId = $stateParams.recipeId || null
 
             scope.addOrViewRecipes = function () {
-                $state.go(scope.viewRecipes, {userId: scope.user.id})
-            }
+                $state.go(scope.viewRecipes, {userId: $stateParams.userId});
+            };
         }
     };
 });

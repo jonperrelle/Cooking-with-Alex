@@ -9,13 +9,30 @@
       <div class="col-md-4 col-sm-3 col-xs-1"></div>
       <div class="col-md-4 col-sm-6 col-xs-10">
         <div class="col-xs-12 text-center">
-            <button ui-sref="login" class="btn btn-raised btn-primary">Login</button>
+            <button ui-sref="login" class="btn">Login</button>
         </div>
         <div class="col-xs-12 text-center">
-            <button ui-sref="signup" class="btn btn-raised btn-primary expanded" ui-sref="signup">Sign Up</button>
+            <button ui-sref="signup" class="btn" ui-sref="signup">Sign Up</button>
         </div>
       </div>
       <div class="col-md-4 col-sm-3 col-xs-1"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-xs-1"></div>
+      <div class="col-sm-6 col-xs-10">
+        <div class="col-xs-12 text-center">
+            <h3>Search for a Recipe</h3>
+        </div>
+        <div class="col-xs-12 text-center">
+          <div class="input-group">
+            <input type="text" class="form-control search-box" placeholder="Search for a Recipe..." ng-model="recipe">
+            <span class="input-group-btn">
+              <button class="btn search-btn" type="button" ng-click="submitQuery(recipe)">Search!</button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-1"></div>
     </div>
   </div>
 </section>

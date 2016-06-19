@@ -19,7 +19,7 @@ app.factory('RecipeFactory', function ($http) {
           else utterThis = new SpeechSynthesisUtterance(item.innerHTML);
           utterThis.voice = voice;
           utterThis.pitch = 1;
-          utterThis.rate = .6;
+          utterThis.rate = .8;
           synth.speak(utterThis);
           ingredientIndex++;
         }
@@ -39,7 +39,7 @@ app.factory('RecipeFactory', function ($http) {
           else utterThis = new SpeechSynthesisUtterance(item);
           utterThis.voice = voice;
           utterThis.pitch = 1;
-          utterThis.rate = .6;
+          utterThis.rate = .8;
           synth.speak(utterThis);
           directionIndex++;
         }

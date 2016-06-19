@@ -21,6 +21,16 @@ app.factory('RecipesFactory', function ($http) {
     		.then(function(response) {
     			return response.data;
     		})
-    	}
+    	},
+
+        editRecipe: function(userId, recipe) {
+            return $http.put('api/users/' + userId + '/recipes/' + recipe.id, recipe)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
     };
 })
+
+
+

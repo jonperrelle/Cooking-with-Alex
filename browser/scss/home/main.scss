@@ -16,11 +16,13 @@
     margin-top: 150px;
     text-align: center;
     color: white;
+    text-shadow: 1px 1px 1px #6A6762;
   }
-  h4 {
+  h3, h4 {
     margin-top: 20px;
     text-align: center;
     color: white;
+    text-shadow: 1px 1px 1px #6A6762;
   }
 }
 
@@ -56,4 +58,19 @@
     border: 1px solid #6A6762;
   }
 }
+
+.search-box {
+    border: 1px solid #6A6762;
+}
+
+.search-btn {
+    color: white;
+    background: #6A6762;
+}
+
+.search-btn:hover {
+    background: white;
+    color: #6A6762;
+    border: 1px solid #6A6762;
+  }
 

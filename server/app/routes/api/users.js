@@ -56,3 +56,19 @@ router.get('/:id/recipes/:recipeId', function(req, res, next) {
         .catch(next);
     }
 })
+
+router.put('/:id/recipes/:recipeId', function(req, res, next) {
+    if (req.user.id !== req.loggedInUser.id) res.sendStatus(401);  
+    else {
+        Recipe.update(req.body, {
+            where: {
+                id: req.params.recipeId
+            }
+        })
+        .then(function(updated) {
+            if(!updated) throw _error('could not update order', 500);
+            res.send({userId: req.loggedInUser.id, recipeId: req.params.recipeId});
+        })
+        .catch(next);
+    }
+})

@@ -21,8 +21,14 @@ app.config(function ($stateProvider) {
     });   
 });
 
-app.controller('HomeCtrl', function ($scope, allRecipes, Session) {
+app.controller('HomeCtrl', function ($scope, allRecipes, Session, $state, HomeFactory) {
 	$scope.recipes = allRecipes;
     $scope.user = Session.user;
+    $scope.submitQuery = function (recipe) {
+        HomeFactory.submitQuery(recipe)
+        .then(function (data) {
+            console.log(data);
+        })
+    }
 
 })

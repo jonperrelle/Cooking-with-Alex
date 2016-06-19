@@ -1,0 +1,79 @@
+<section>
+
+	<div class="row home-container">
+		<user-recipe-header view-recipes="userRecipes" button="Return to Your Recipes"></user-recipe-header>
+		<div class="add-recipe">
+			<header class="text-center">
+			  <h3>Edit Recipe For {{recipe.title}}</h3>
+			</header>
+		  	<form class="add-recipe-form" name="AddRecipeForm" role="form" novalidate>
+		  		<fieldset>
+		  			<div class="row">
+				      <div class="form-group col-xs-6">
+				        <label for="title" class="control-label">Title</label>
+				        <div>
+				          <input class="form-control" name="title" type="text" ng-model="recipe.title" required>
+				        </div>
+				      </div>
+				      <div class="form-group col-xs-6">
+				        <label for="meal-type" class="control-label">Meal Type</label>
+				        <div>
+				          <select class="form-control" name="type" type="text" ng-model="recipe.mealtype" required>
+				          	<option value="Breakfast">Breakfast</option>
+				          	<option value="Lunch">Lunch</option>
+				          	<option value="Dinner">Dinner</option>
+				          	<option value="Dessert">Dessert</option>
+				          </select>
+				        </div>
+				      </div>
+				    </div>
+				    <div class="row">
+				    	<div class="form-group col-xs-12">
+					        <label for="description" class="control-label">Description</label>
+					        <div>
+					          <input class="form-control" name="description" type="text" ng-model="recipe.description" required>
+					        </div>
+					    </div>
+				    </div>
+				    <div class="row">
+				    	<div class="form-group col-sm-6 col-xs-12">
+				    		<label for="ingredients" class="control-label">Ingredients</label>
+				    		<div>
+				    			 <input class="form-control" name="lastName" type="text" ng-model="recipe.ingredients[0]" required>
+				    		</div>
+				    		<div ng-repeat="ingredient in recipe.ingredients">
+							    <input class="form-control" name="lastName" type="text" ng-model="recipe.ingredients[$index+1]" required>
+							</div>
+				    	</div>
+				    	<div class="col-sm-6"></div>
+				    </div>
+				    <div class="row">
+				    	<div class="form-group col-xs-12">
+				    		<label for="directions" class="control-label">Directions</label>
+				    		<div>
+				    			 <input class="form-control" name="lastName" type="text" ng-model="recipe.directions[0]" required>
+				    		</div>
+				    		<div ng-repeat="direction in recipe.directions">
+							    <input class="form-control" name="lastName" type="text" ng-model="recipe.directions[$index+1]" required>
+							</div>
+				    	</div>
+				    </div>
+				    <div class="row">
+				      <div class="form-group col-xs-6">
+				        <button class="btn btn-raised btn-primary" ng-click="editRecipe()" type="submit">Save</button>
+				      </div>
+				      <div class="form-group col-xs-6">
+				        <button class="btn btn-raised btn-danger" ng-click="cancel()">Cancel</button>
+				      </div>
+				   	</div>
+			  	</fieldset>
+		  </form>
+		</div>
+	</div>
+
+
+
+
+
+
+</section>

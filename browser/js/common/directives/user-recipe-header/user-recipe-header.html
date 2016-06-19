@@ -1,6 +1,7 @@
 <header class="text-center">
   <ul class="user-recipes-header">
-      <li><button class="btn user-recipes-btn" ui-sref="userHome({userId: user.id})">Return to Your Dashboard</button></li>
+      <li><button class="btn user-recipes-btn" ui-sref="userHome({userId: userId})">Return to Your Dashboard</button></li>
       <li><button class="btn user-recipes-btn" ng-click="addOrViewRecipes()">{{button}}</button></li>
+      <li><button class="btn user-recipes-btn" ui-sref="editUserRecipe({userId: userId, recipeId: recipeId})" ng-show="edit">Edit Recipe</button></li>
   </ul>
 </header>
