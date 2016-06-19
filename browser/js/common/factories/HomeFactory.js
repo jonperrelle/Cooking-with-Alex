@@ -6,9 +6,14 @@ app.factory('HomeFactory', function ($http) {
             .then(function(response) {
             	console.log(response.data);
             	return response.data
-            })
+            });
+        },
 
-
+        getRecipeDetails: function (recipeId) {
+        	return $http.get('api/search/' + recipeId)
+        	.then(function(response) {
+        		return response.data;
+        	});
         }
     };
 });

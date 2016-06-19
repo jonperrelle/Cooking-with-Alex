@@ -28,6 +28,7 @@ app.controller('HomeCtrl', function ($scope, allRecipes, Session, $state, HomeFa
         HomeFactory.submitQuery(recipe)
         .then(function (data) {
             console.log(data);
+            $state.go('searchRecipes', {recipeQuery: recipe, results: data.results})
         })
     }
 
