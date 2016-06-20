@@ -16,16 +16,20 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('SearchRecipesCtrl', function ($scope, $stateParams) {
+    console.log($stateParams.results)
     $scope.results = $stateParams.results;   
 });
 
-app.controller('SearchRecipesDetailsCtrl', function ($scope, $stateParams, HomeFactory, RecipesFactory) {
+app.controller('SearchRecipesDetailsCtrl', function ($scope, $stateParams, HomeFactory, RecipesFactory, Session, $state) {
+    $scope.recipe = {};
     var re = /\<\/?li\>/g;
     HomeFactory.getRecipeDetails($stateParams.recipeId)
     .then(function(data) {
+        console.log(data);
         $scope.recipe.title = data.title;
-        $scope.recipe.ingredients = data.extendedIngredients.map( i => a.originalString);
-        $scope.recipe.directions = data.instructions.split("\n").filter( a => a.match(/(\<li\>)/g)).map( b => b.replace(re, ""));
+        $scope.recipe.ingredients = data.extendedIngredients.map( i => i.originalString);
+        console.log(data.instructions);
+        $scope.recipe.directions = data.instructions.split(/\n/).filter( a => a.match(/(\<li\>)/g)).map( b => b.replace(re, ""));
     });
 
     $scope.addRecipe = function () {
