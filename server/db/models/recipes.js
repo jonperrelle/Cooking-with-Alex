@@ -15,6 +15,12 @@ module.exports = function (db) {
         description: {
           type: Sequelize.TEXT
         },
+        imageUrl: {
+          type: Sequelize.STRING
+        },
+        sourceUrl: {
+          type: Sequelize.STRING
+        },
         ingredients: {
             type: Sequelize.ARRAY(Sequelize.STRING),
             defaultValue: [],

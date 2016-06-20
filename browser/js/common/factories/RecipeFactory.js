@@ -11,7 +11,6 @@ app.factory('RecipeFactory', function ($http) {
     var directionList;
     var ingredientList;
   
-
     function playIngredient () { 
         if (ingredientIndex < ingredientList.length) { 
           var item = ingredientList[ingredientIndex];
@@ -71,6 +70,7 @@ app.factory('RecipeFactory', function ($http) {
 
         ingredientList = [].slice.call(document.querySelector(".ingredient-list").children);
         if (annyang) {
+
           var commands = {
             'ingredients': function () {
                 ingredientIndex = 0

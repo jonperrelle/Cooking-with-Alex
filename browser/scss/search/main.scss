@@ -1,0 +1,19 @@
+.searched-recipes {
+  height: 350px;
+}
+
+.recipe-info {
+  float: left;
+  margin-left: 30px;
+}
+
+.recipe-search {
+   background: #ffffff;
+   border: 1px solid #6A6762;
+   border-radius: 5px;
+   margin: 20px 0;
+   h4 {
+    font-weight: 900;
+    color: #6A6762;
+   }
+}
