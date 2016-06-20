@@ -25,6 +25,6 @@ app.controller('EditUserRecipeCtrl', function ($scope, RecipesFactory, RecipeFac
    };
 
     $scope.cancel = function () {
-        $state.go("userHome", {userId: Session.user.id});
+        $state.go("userRecipes", {userId: Session.user.id});
     };
 });

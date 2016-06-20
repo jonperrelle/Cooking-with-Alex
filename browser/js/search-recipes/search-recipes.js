@@ -10,8 +10,15 @@ app.config(function ($stateProvider) {
 
     $stateProvider.state('searchRecipes.details', {
         url: '/:recipeId',
-        templateUrl: 'js/search-recipes/search-recipes-details.html',
-        controller:"SearchRecipesDetailsCtrl",
+        views: {
+            '@': {
+                template: "<div ui-view='details'></div>"
+            },
+            'details@searchRecipes.details': {
+                templateUrl: 'js/search-recipes/search-recipes-details.html',
+                controller:"SearchRecipesDetailsCtrl"
+            }
+        }
     });
 });
 
@@ -41,4 +48,8 @@ app.controller('SearchRecipesDetailsCtrl', function ($scope, $stateParams, Searc
             $state.go('oneUserRecipe', {userId: data.userId, recipeId: data.id});
         });
    };
+
+    $scope.cancel = function () {
+        $state.go('^');
+    }
 });

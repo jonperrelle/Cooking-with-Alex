@@ -22,11 +22,13 @@
           <p>Check out the source: <a ng-href={{recipe.sourceUrl}} target="_blank">{{recipe.sourceUrl}}</a></p>
         </div>
       </div>    
-      <div class="row">
+      <div class="row save-cancel-btns">
         <div class="col-xs-6">
-          <button class="btn btn-raised btn-primary" ng-click="addRecipe()" type="submit">Save</button>
+          <button class="btn save-btn" ng-click="addRecipe()" type="submit">Save</button>
         </div>
-        <div class="col-xs-6"></div>
+        <div class="col-xs-6">
+          <button class="btn cancel-btn" ng-click="cancel()" type="submit">Cancel</button>
+        </div>
       </div>     
   </div>
 </div>
