@@ -1,25 +1,28 @@
 <section>
-	<div class="home-container">
-		<div>
-		 	<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="result in results">
-		    	<a ui-sref="searchRecipes.details({recipeId:result.id})">
-		    		<div class="row recipe-text">
-			      		<div class="col-xs-12">
-			      			<div class="recipe-short">
-				          		<h4>{{ result.title }}</h4>
-			         		</div>
-			      		</div>
-		    		</div>
-		    	</a>
-		    </div>
+	<div class="home-container row">
+		<div class="row">
+			<search-recipes></search-recipes>
 		</div>
-	</div>
-	<div>
-		<ui-view></ui-view>
+	 	<div class="col-lg-4 col-md-6 col-xs-12 searched-recipes" ng-repeat="result in results">
+	    	<div class="row">
+			  <a ui-sref="searchRecipes.details({recipeId:result.id})">
+			  	<div class="col-xs-10 recipe-search">
+				   <img class="thumbnail" height="150" width="150" ng-src="https://spoonacular.com/recipeImages/{{ result.image}}">
+					<h4>{{ result.title }}</h4>
+				</div>
+				<div class="col-xs-2"></div>
+			  </a>
+	    	</div>
+		</div>
+		<div>
+			<ui-view></ui-view>
+		</div>
 	</div>
 </section>
 
 
 
-<!-- https://spoonacular.com/recipeImages/ -->
+
+
+	
 

@@ -2,6 +2,9 @@
   <user-recipe-header view-recipes="userRecipes" button="Return to Your Recipes" edit="true"></user-recipe-header>
   <div class="col-lg-4 col-md-6 col-xs-12 recipe">
       <header class="text-center">
+        <div ng-show="recipe.imageUrl">
+          <img height="150" width="150" ng-src="{{recipe.imageUrl}}" />
+        </div>
         <h2 id="recipe-title">{{ recipe.title }}</h2>
         <h5>{{ recipe.description}}</h5>
         <button class="btn user-recipes-btn" ng-click="enableAlex()">Enable Alex</button>
@@ -19,6 +22,11 @@
         <ul class="direction-list">
           <li ng-repeat="direction in recipe.directions">{{direction}}</li>
         </ul>
-      </div>      
+      </div> 
+      <div class="row" ng-show="recipe.sourceUrl">
+        <div class="col-xs-12">
+          <p>Check out the source: <a ng-href={{recipe.sourceUrl}} target="_blank">{{recipe.sourceUrl}}</a></p>
+        </div>
+      </div>       
   </div>
 </div>

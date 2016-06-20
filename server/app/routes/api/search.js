@@ -31,7 +31,5 @@ router.get('/:recipeId', function (req, res, next){
       res.send(finalResult.body);
     });
   });
-
-  // res.send({title: "Demo Recipe", extendedIngredients: [{originalString: "1 egg"}, {originalString: "2 cups milk"}], instructions: "<li>Step 1</li>\n<li>Step2</li>"})
 });
 

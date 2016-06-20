@@ -20,12 +20,14 @@ app.controller('SearchRecipesCtrl', function ($scope, $stateParams) {
     $scope.results = $stateParams.results;   
 });
 
-app.controller('SearchRecipesDetailsCtrl', function ($scope, $stateParams, HomeFactory, RecipesFactory, Session, $state) {
+app.controller('SearchRecipesDetailsCtrl', function ($scope, $stateParams, SearchFactory, RecipesFactory, Session, $state) {
     $scope.recipe = {};
     var re = /\<\/?li\>/g;
-    HomeFactory.getRecipeDetails($stateParams.recipeId)
+    SearchFactory.getRecipeDetails($stateParams.recipeId)
     .then(function(data) {
         console.log(data);
+        $scope.recipe.sourceUrl = data.sourceUrl;
+        $scope.recipe.imageUrl = "https://spoonacular.com/recipeImages/" + data.image;
         $scope.recipe.title = data.title;
         $scope.recipe.ingredients = data.extendedIngredients.map( i => i.originalString);
         console.log(data.instructions);

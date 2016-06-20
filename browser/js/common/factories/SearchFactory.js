@@ -1,4 +1,4 @@
-app.factory('HomeFactory', function ($http) {
+app.factory('SearchFactory', function ($http) {
     
 	return {
 		submitQuery: function (recipe) {

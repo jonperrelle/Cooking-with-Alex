@@ -10,10 +10,7 @@ app.factory('RecipeFactory', function ($http) {
     var recognition = new SpeechRecognition();
     var directionList;
     var ingredientList;
-
-    console.log("inRecipeFactory");
   
-
     function playIngredient () { 
         if (ingredientIndex < ingredientList.length) { 
           var item = ingredientList[ingredientIndex];
@@ -74,7 +71,6 @@ app.factory('RecipeFactory', function ($http) {
         ingredientList = [].slice.call(document.querySelector(".ingredient-list").children);
         if (annyang) {
 
-          console.log('in Annyang');
           var commands = {
             'ingredients': function () {
                 ingredientIndex = 0

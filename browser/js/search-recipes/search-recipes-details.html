@@ -17,6 +17,11 @@
           <li ng-repeat="direction in recipe.directions">{{direction}}</li>
         </ul>
       </div> 
+      <div class="row" ng-show="recipe.sourceUrl">
+        <div class="col-xs-12">
+          <p>Check out the source: <a ng-href={{recipe.sourceUrl}} target="_blank">{{recipe.sourceUrl}}</a></p>
+        </div>
+      </div>    
       <div class="row">
         <div class="col-xs-6">
           <button class="btn btn-raised btn-primary" ng-click="addRecipe()" type="submit">Save</button>
